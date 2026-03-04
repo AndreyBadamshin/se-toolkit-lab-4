@@ -19,8 +19,7 @@ class InteractionLog(SQLModel, table=True):
     learner_id: int = Field(foreign_key="learner.id")
     item_id: int = Field(foreign_key="item.id")
     kind: str
-    created_at: datetime | None = Field(default=None)
-
+    created_at: datetime | None = Field(default_factory=datetime.utcnow)
 
 class InteractionLogCreate(SQLModel):
     """Request schema for creating an interaction log."""
@@ -37,4 +36,4 @@ class InteractionModel(SQLModel):
     learner_id: int
     item_id: int
     kind: str
-    timestamp: datetime
+    created_at: datetime
